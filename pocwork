@@ -1,19 +1,7 @@
-Here's a concise, structured write-up to introduce the **DNS Failover** section clearly and professionally in your DR playbook:
+Here's a concise and clear write-up capturing your networking team's explanation:
 
 ---
 
-## About DNS Failover
+## DNS Replication in BlueCat
 
-To ensure rapid and reliable recovery during disaster scenarios, DNS failover automation is implemented through **UC4 jobs**. These UC4 jobs handle DNS record updates for the GitHub Enterprise platform across AWS (**us-east-2, us-west-2**) and On-Premises environments.
-
-The UC4 jobs cover the following three DNS failover scenarios:
-
-1. **Availability Zone Failover (Within Region: us-east-2)**
-2. **Region Failover (From us-east-2 to us-west-2)**
-3. **Cloud Failover (AWS to On-Premises)**
-
-Each scenario triggers an automated DNS flip, updating the DNS (`github.com`) to point to the appropriate, pre-defined target hostname to ensure minimal disruption and downtime.
-
-The Networking team manages and executes these UC4 jobs upon disaster declaration to quickly restore GitHub Enterprise services.
-
----
+DNS changes executed via UC4 jobs are first applied to the **primary node** within the BlueCat DNS infrastructure. Once updated, the primary node automatically replicates these changes to all other BlueCat nodes within a fraction of a second. This rapid synchronization ensures consistent DNS resolution across all locations, facilitating immediate and seamless failover during disaster recovery events.
