@@ -1,14 +1,14 @@
-Here are **three strong and clear assumptions** you can include in your DR runbook:
+Here are **three strong and clear risks** you can include in your DR runbook:
 
 ---
 
-## Assumptions
+## Risks
 
-1. **DNS Availability:**
-   BlueCat DNS infrastructure remains operational and accessible during disaster scenarios, ensuring DNS updates via UC4 jobs propagate rapidly across all DNS nodes.
+1. **DNS Replication Delay or Failure:**
+   Potential delays or failures in BlueCat DNS replication might result in extended downtime or inconsistent DNS resolution, impacting recovery time objectives.
 
-2. **Replication Health:**
-   GitHub replication between primary (**us-east-2a**) and replica instances (in AWS and On-Premises) is consistently active and healthy, maintaining minimal data replication lag to facilitate quick recovery.
+2. **Replication Lag in GitHub Instances:**
+   Excessive replication lag between the primary GitHub instance (**us-east-2a**) and replica instances could result in data loss or inconsistencies upon failover, negatively impacting data integrity.
 
-3. **Network Connectivity:**
-   Stable and reliable network connectivity exists between AWS regions (**us-east-2**) and the On-Premises environment, ensuring immediate and seamless traffic rerouting upon executing failover procedures.
+3. **Network Connectivity Issues:**
+   Network disruptions or latency between AWS environments (**us-east-2**) and On-Premises infrastructure may cause delays or failures during failover execution, hindering the recovery process.
