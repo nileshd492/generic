@@ -1,14 +1,7 @@
-Here are **three strong and clear risks** you can include in your DR runbook:
+Here's how you can clearly document this point in your DR runbook:
 
 ---
 
-## Risks
+## Known Issues and Related Procedures
 
-1. **DNS Replication Delay or Failure:**
-   Potential delays or failures in BlueCat DNS replication might result in extended downtime or inconsistent DNS resolution, impacting recovery time objectives.
-
-2. **Replication Lag in GitHub Instances:**
-   Excessive replication lag between the primary GitHub instance (**us-east-2a**) and replica instances could result in data loss or inconsistencies upon failover, negatively impacting data integrity.
-
-3. **Network Connectivity Issues:**
-   Network disruptions or latency between AWS environments (**us-east-2**) and On-Premises infrastructure may cause delays or failures during failover execution, hindering the recovery process.
+This section will be updated with identified issues and relevant resolution procedures upon completion of Disaster Recovery (DR) testing.
