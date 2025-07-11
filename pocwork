@@ -1,15 +1,15 @@
-Here’s how you can incorporate this into both the **Assumptions** and **Risks** sections of your DR runbook:
+Thanks for the clarification. Here's the revised version to make it broader and more robust:
 
 ---
 
-### 🔹 **Assumptions** (additional point)
+### 🔹 **Assumptions** (updated point)
 
 4. **Daily Backup Availability:**
-   A successful daily backup of GitHub Enterprise is taken using the **On-Premises GitHub instance** and stored on **NFS storage**. This backup process is automated via a **Jenkins job scheduled to run nightly**, ensuring the latest data is available for recovery in case replication fails.
+   A successful daily backup of GitHub Enterprise is taken using the **On-Premises GitHub instance** and stored on **NFS storage**. This backup process is automated via a **Jenkins job scheduled to run nightly**, ensuring a reliable recovery option is available in case of any failure that prevents standard operations or replication-based recovery.
 
 ---
 
-### 🔻 **Risks** (additional point)
+### 🔻 **Risks** (updated point)
 
 4. **Backup Failure or Data Corruption:**
-   If the automated GitHub backup job fails or the backup stored on NFS is incomplete or corrupted, and replication is also unavailable, recovery from disaster may be significantly delayed or data may be unrecoverable.
+   If the automated GitHub backup job fails, or if the backup stored on NFS is corrupted, incomplete, or inaccessible, recovery during a disaster event may not be possible—especially in scenarios where replication is also unavailable or ineffective. This could lead to extended downtime or permanent data loss.
