@@ -1,15 +1,34 @@
-Thanks for the clarification. Here's the revised version to make it broader and more robust:
+Incident Overview:
+Terraform Enterprise (TFE) is experiencing a service disruption causing unavailability of its UI, APIs, and related functionalities. This incident has led to the interruption of Terraform workflows and automation activities.
 
----
+Impacted Components:
+Terraform Enterprise Application (UI/API)
 
-### 🔹 **Assumptions** (updated point)
+EDB PostgreSQL Database (primary instance)
 
-4. **Daily Backup Availability:**
-   A successful daily backup of GitHub Enterprise is taken using the **On-Premises GitHub instance** and stored on **NFS storage**. This backup process is automated via a **Jenkins job scheduled to run nightly**, ensuring a reliable recovery option is available in case of any failure that prevents standard operations or replication-based recovery.
+Redis/ElastiCache service (if applicable)
 
----
+Infrastructure components (Compute, Load Balancers, Object Storage)
 
-### 🔻 **Risks** (updated point)
+Impact Assessment:
+Complete or partial unavailability of TFE for users.
 
-4. **Backup Failure or Data Corruption:**
-   If the automated GitHub backup job fails, or if the backup stored on NFS is corrupted, incomplete, or inaccessible, recovery during a disaster event may not be possible—especially in scenarios where replication is also unavailable or ineffective. This could lead to extended downtime or permanent data loss.
+Inability to execute automated deployments or infrastructure changes.
+
+Potential disruption of dependent CI/CD pipelines and automation workflows.
+
+Reason for Failover:
+Unplanned infrastructure failure or critical incident requiring immediate initiation of disaster recovery failover procedures.
+
+Current Actions:
+Decision confirmed to initiate DR failover to the designated DR environment.
+
+Relevant teams (Infrastructure, Application Ops, Network, Database, and Security) have been notified and engaged.
+
+Stakeholder communications are ongoing.
+
+Next Steps:
+Execute immediate DR failover steps as per the defined Disaster Recovery plan.
+
+Provide regular updates to all stakeholders and track incident resolution progress closely.
+
