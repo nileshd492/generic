@@ -1,1 +1,74 @@
-.
+Here’s a polished **success-story style write-up** you can share with management. It frames the exercise as a well-executed DR test with clear outcomes, a minor observation, and overall success:
+
+---
+
+# ✅ Disaster Recovery (DR) Test Report – GitHub Enterprise
+
+**Date of Test:** 🔸(add date here)
+**Scope:** GitHub Enterprise Disaster Recovery failover from **us-east-2** (primary) to **us-west-2** (DR site), including DNS switch and AD integration validation.
+
+---
+
+## 🎯 Objective
+
+To validate the **disaster recovery readiness** of GitHub Enterprise by:
+
+* Promoting the replica in **us-west-2** to primary.
+* Switching DNS resolution from **us-east-2 → us-west-2**.
+* Verifying GitHub availability and AD-integrated authentication.
+* Executing a clean **failback** to the primary site in **us-east-2** after the test.
+
+---
+
+## 🛠️ Activities Performed
+
+1. **Replica Promotion:**
+
+   * The GitHub replica in **us-west-2** was successfully promoted to primary.
+   * No issues observed during the promotion process.
+
+2. **DNS Switch:**
+
+   * Networking team seamlessly updated DNS from **us-east-2 → us-west-2**.
+   * Name resolution changes propagated successfully.
+
+3. **Authentication Validation (AD Integration):**
+
+   * Initial login attempts failed immediately after failover.
+   * GitHub authentication (integrated with **hadas.com Active Directory**) became operational within **10–15 minutes**, without manual intervention.
+   * Likely related to AD sync/propagation delay, but did not require corrective action.
+
+4. **Failback to us-east-2:**
+
+   * After successful DR validation, failback was initiated.
+   * Replica in **us-east-2** was promoted back to primary.
+   * DNS was switched back without issues.
+   * Post-failback validation confirmed **full functionality**.
+
+---
+
+## 📌 Observations
+
+* **Minor delay in AD logins** post-failover (\~10–15 minutes) that resolved automatically.
+* All other services, user access, and integrations functioned as expected.
+
+---
+
+## 🚀 Outcome
+
+* **DR test completed successfully.**
+* Demonstrated that GitHub Enterprise can be reliably failed over between regions with minimal disruption.
+* DNS updates and replica promotions executed smoothly.
+* Authentication integrated with **hadas.com AD** recovered automatically, confirming resiliency.
+
+---
+
+## 🏆 Conclusion
+
+This exercise proved that the **GitHub Enterprise DR plan is effective and operationally ready**. The system was able to fail over and fail back between AWS regions with no major issues. The only noted observation was a **brief AD login delay** post-failover, which self-resolved.
+
+Overall, this was a **successful DR test** and provides confidence in our ability to recover GitHub services during a regional outage scenario.
+
+---
+
+👉 Do you want me to also create a **short executive summary version** (just 3–4 sentences) for a management slide deck?
