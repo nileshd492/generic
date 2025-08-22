@@ -1,74 +1,31 @@
-Here’s a polished **success-story style write-up** you can share with management. It frames the exercise as a well-executed DR test with clear outcomes, a minor observation, and overall success:
+Here’s a **professional “Next Action Items” section** you can add to your DR success story write-up. I’ve written it in a structured way so you can directly plug it into your report:
 
 ---
 
-# ✅ Disaster Recovery (DR) Test Report – GitHub Enterprise
+## 📌 Next Action Items
 
-**Date of Test:** 🔸(add date here)
-**Scope:** GitHub Enterprise Disaster Recovery failover from **us-east-2** (primary) to **us-west-2** (DR site), including DNS switch and AD integration validation.
+While the GitHub Enterprise DR test was successfully executed, the following **action items** have been identified to streamline and automate future DR events:
 
----
+1. **Harness Integration**
 
-## 🎯 Objective
+   * Configure all GitHub failover and failback scripts in **Harness**.
+   * Ensure jobs are parameterized and reusable for future DR drills.
 
-To validate the **disaster recovery readiness** of GitHub Enterprise by:
+2. **Automation via UC4**
 
-* Promoting the replica in **us-west-2** to primary.
-* Switching DNS resolution from **us-east-2 → us-west-2**.
-* Verifying GitHub availability and AD-integrated authentication.
-* Executing a clean **failback** to the primary site in **us-east-2** after the test.
+   * Work with the **UC4 team** to create UC4 jobs that will invoke the Harness pipelines.
+   * Validate end-to-end automation flow (UC4 ➜ Harness ➜ GitHub failover/failback).
 
----
+3. **Job Creation & Configuration**
 
-## 🛠️ Activities Performed
+   * Create all required **Harness jobs** for both failover and failback scenarios.
+   * Map dependencies, validations, and rollback steps within Harness.
 
-1. **Replica Promotion:**
+4. **Team Coordination**
 
-   * The GitHub replica in **us-west-2** was successfully promoted to primary.
-   * No issues observed during the promotion process.
-
-2. **DNS Switch:**
-
-   * Networking team seamlessly updated DNS from **us-east-2 → us-west-2**.
-   * Name resolution changes propagated successfully.
-
-3. **Authentication Validation (AD Integration):**
-
-   * Initial login attempts failed immediately after failover.
-   * GitHub authentication (integrated with **hadas.com Active Directory**) became operational within **10–15 minutes**, without manual intervention.
-   * Likely related to AD sync/propagation delay, but did not require corrective action.
-
-4. **Failback to us-east-2:**
-
-   * After successful DR validation, failback was initiated.
-   * Replica in **us-east-2** was promoted back to primary.
-   * DNS was switched back without issues.
-   * Post-failback validation confirmed **full functionality**.
+   * Establish coordination between **Cloud/Infra team, Harness team, and UC4 team** to align automation strategy and timelines.
+   * Define ownership and RACI (Responsible, Accountable, Consulted, Informed) for each step.
 
 ---
 
-## 📌 Observations
-
-* **Minor delay in AD logins** post-failover (\~10–15 minutes) that resolved automatically.
-* All other services, user access, and integrations functioned as expected.
-
----
-
-## 🚀 Outcome
-
-* **DR test completed successfully.**
-* Demonstrated that GitHub Enterprise can be reliably failed over between regions with minimal disruption.
-* DNS updates and replica promotions executed smoothly.
-* Authentication integrated with **hadas.com AD** recovered automatically, confirming resiliency.
-
----
-
-## 🏆 Conclusion
-
-This exercise proved that the **GitHub Enterprise DR plan is effective and operationally ready**. The system was able to fail over and fail back between AWS regions with no major issues. The only noted observation was a **brief AD login delay** post-failover, which self-resolved.
-
-Overall, this was a **successful DR test** and provides confidence in our ability to recover GitHub services during a regional outage scenario.
-
----
-
-👉 Do you want me to also create a **short executive summary version** (just 3–4 sentences) for a management slide deck?
+👉 Would you like me to also add a **proposed timeline (e.g., 2 weeks for Harness setup, 1 week for UC4 integration, 1 week for dry-run)** so management sees a clear execution plan alongside the action items?
