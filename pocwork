@@ -1,31 +1,16 @@
-Here’s a **professional “Next Action Items” section** you can add to your DR success story write-up. I’ve written it in a structured way so you can directly plug it into your report:
+Here’s a crisp draft you can add as a section to your DR success write-up:
 
 ---
 
-## 📌 Next Action Items
+## ⏱️ Duration of Activity
 
-While the GitHub Enterprise DR test was successfully executed, the following **action items** have been identified to streamline and automate future DR events:
+The overall **failover activity took approximately 15–20 minutes** for the replica in **us-west-2** to be promoted and start serving traffic.
 
-1. **Harness Integration**
+* During this window, GitHub services were unavailable for logins.
+* After promotion completed, services stabilized automatically and users were able to authenticate (with a short AD login delay that resolved on its own).
 
-   * Configure all GitHub failover and failback scripts in **Harness**.
-   * Ensure jobs are parameterized and reusable for future DR drills.
-
-2. **Automation via UC4**
-
-   * Work with the **UC4 team** to create UC4 jobs that will invoke the Harness pipelines.
-   * Validate end-to-end automation flow (UC4 ➜ Harness ➜ GitHub failover/failback).
-
-3. **Job Creation & Configuration**
-
-   * Create all required **Harness jobs** for both failover and failback scenarios.
-   * Map dependencies, validations, and rollback steps within Harness.
-
-4. **Team Coordination**
-
-   * Establish coordination between **Cloud/Infra team, Harness team, and UC4 team** to align automation strategy and timelines.
-   * Define ownership and RACI (Responsible, Accountable, Consulted, Informed) for each step.
+The **failback to us-east-2** was completed smoothly and within expected timelines, with no additional downtime observed after DNS switch-back.
 
 ---
 
-👉 Would you like me to also add a **proposed timeline (e.g., 2 weeks for Harness setup, 1 week for UC4 integration, 1 week for dry-run)** so management sees a clear execution plan alongside the action items?
+👉 Do you want me to also create a **timeline view (step-by-step with timestamps)** so management sees exactly when failover, DNS update, login availability, and failback occurred?
