@@ -1,5 +1,120 @@
-Retest via UC4 Automation
+Got it 👍 — here’s a **professional, management-ready draft** of your Jenkins DR test report. I’ve structured it similar to the GitHub write-up, but it highlights the **challenges, learnings, and next action items** so management sees both transparency and readiness.
 
-Plan and execute another GitHub DR test, this time orchestrated fully through UC4 automation calling Harness jobs.
+---
 
-Validate that automation reduces manual intervention, improves speed, and ensures consistency in future DR runs.
+# 🚧 Jenkins Disaster Recovery (DR) Test Report
+
+**Date of Test:** 🔸(add date here)
+**Scope:** Jenkins Disaster Recovery failover from **us-east-2** (primary) to **us-west-2** (DR site), covering **1 Operations Center (OC) and 6 controllers**, DNS switch, service validation, and failback.
+
+---
+
+## 🎯 Objective
+
+To validate the **disaster recovery readiness** of Jenkins Enterprise by:
+
+* Shutting down services in **us-east-2** (primary region).
+* Starting Jenkins services in **us-west-2** (DR region).
+* Ensuring OC and controller availability.
+* Executing DNS switch between regions.
+* Validating stability and documenting observations.
+
+---
+
+## 🛠️ Activities Performed
+
+1. **Shutdown in us-east-2**
+
+   * Logged in to **1 OC + 6 controllers** in us-east-2.
+   * Stopped **nginx** (`systemctl stop nginx`) and removed docker containers (`docker rm`).
+   * Confirmed all Jenkins services fully stopped.
+   * Networking team switched DNS from us-east-2 → us-west-2 (successful).
+
+2. **Bring-up in us-west-2**
+
+   * Started services on **1 OC + 6 controllers**.
+   * Observed that **nginx was already running** on all servers, but docker containers needed to be started.
+   * Attempted to use `./start.sh` script — encountered issues due to **hardcoded server references (us-east-2)**.
+   * Corrected the script; containers came up, but **OC UI reported license expired**.
+
+3. **License Issue Resolution**
+
+   * Root cause: `jenkins_home` was not fully in sync.
+   * Action: Copied `jenkins_home` directory from us-east-2 OC → us-west-2 OC.
+   * Result: License issue resolved.
+
+4. **Controller Issues**
+
+   * Docker containers and nginx services were up on controllers, but controllers still showed **down**.
+   * Jenkins Support engaged; provided troubleshooting doc ([link](https://test.com)).
+   * Applied fix → **2 controllers came up successfully**.
+   * Remaining **4 controllers deferred** to next testing iteration due to change window constraints.
+
+5. **Failback to us-east-2**
+
+   * Stopped services in us-west-2, restarted Jenkins services in us-east-2.
+   * Networking team switched DNS back to us-east-2 successfully.
+   * Post-failback validation confirmed services stable.
+
+---
+
+## ⏱️ Duration & Performance Observations
+
+* **OC startup:** \~1–2 minutes.
+* **Controller startup:** \~2–3 minutes for services; \~30 minutes reported for controllers to be fully operational.
+* **Replica promotion (overall failover activity):** \~15–20 minutes to get OC functional.
+
+---
+
+## 📌 Key Observations
+
+* `./start.sh` scripts contained **hardcoded server names (us-east-2)** — caused initial failures.
+* **License expired issue** resolved only after copying full `jenkins_home`.
+* **Controller startup delays**: some controllers took significantly longer (\~30 minutes) to fully initialize.
+* DNS switching by networking team worked **smoothly in both directions**.
+
+---
+
+## 🚀 Outcome
+
+* DR activity **not fully smooth**, but provided **valuable learnings** for future readiness.
+* OC successfully promoted and 2 controllers brought online in DR region.
+* Remaining controllers will be validated in the **next DR iteration**.
+* Rollback to us-east-2 was clean and successful.
+
+---
+
+## 📌 Next Action Items
+
+1. **Script Improvements**
+
+   * Update `./start.sh` scripts to use **DNS names** instead of hardcoded server references.
+
+2. **Jenkins Home Replication**
+
+   * Ensure full `jenkins_home` directory synchronization between us-east-2 and us-west-2.
+   * Since `jenkins_home` resides on **EFS**, evaluate and finalize replication strategy:
+
+     * **AWS EFS Replication** (native, async) or
+     * **AWS DataSync** (scheduled transfers).
+
+3. **Automation**
+
+   * Configure failover/failback scripts in **Harness**.
+   * Work with **UC4 team** to create UC4 jobs that trigger Harness pipelines for DR automation.
+
+4. **Further DR Testing**
+
+   * Conduct another DR test, this time **via UC4 automation**, to validate end-to-end orchestration.
+   * Include full validation of all 6 controllers.
+
+---
+
+## 🏆 Conclusion
+
+The Jenkins DR test exposed critical gaps in automation, configuration, and replication, but also validated the **overall DR design and rollback capability**.
+With identified improvements — script standardization, EFS replication, and automation via Harness/UC4 — future DR tests are expected to be **faster, smoother, and more reliable**.
+
+---
+
+👉 Do you want me to also prepare a **short executive summary (3–4 bullet points)** version of this report for management slides, similar to what we did for GitHub?
