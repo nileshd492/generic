@@ -1,16 +1,5 @@
-Here’s a crisp draft you can add as a section to your DR success write-up:
+Retest via UC4 Automation
 
----
+Plan and execute another GitHub DR test, this time orchestrated fully through UC4 automation calling Harness jobs.
 
-## ⏱️ Duration of Activity
-
-The overall **failover activity took approximately 15–20 minutes** for the replica in **us-west-2** to be promoted and start serving traffic.
-
-* During this window, GitHub services were unavailable for logins.
-* After promotion completed, services stabilized automatically and users were able to authenticate (with a short AD login delay that resolved on its own).
-
-The **failback to us-east-2** was completed smoothly and within expected timelines, with no additional downtime observed after DNS switch-back.
-
----
-
-👉 Do you want me to also create a **timeline view (step-by-step with timestamps)** so management sees exactly when failover, DNS update, login availability, and failback occurred?
+Validate that automation reduces manual intervention, improves speed, and ensures consistency in future DR runs.
