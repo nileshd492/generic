@@ -1,16 +1,16 @@
-Proposal: Enable `--active` flag on GHES replica nodes for smoother DR failover
+Proposal to Enable Active Mode for Replica Nodes on GitHub Enterprise Server
 
 Hi Team,
 
-Currently, our West and On-prem GitHub Enterprise Server replicas are configured without the `--active` flag, meaning they serve only as standby nodes. In the event of a DR switchover, we need to run `ghe-repl-promote`, which results in a visible outage before the replica starts handling requests.
+I'd like to propose an update to our GitHub Enterprise Server configuration across the three regions: East (primary), West, and On-prem.
 
-I recommend enabling these replicas with the **`ghe-repl-node --active` flag**. With active replicas:
+Currently, our West and On-prem appliances serve as replicas. To improve availability and user experience, I recommend that we enable the **active mode** for these replica nodes using the `ghe-repl-node --active` flag.
 
-* **User traffic is already served locally** in West and On-prem regions, reducing latency and improving user experience during normal operations.
-* During a **planned or unplanned failover**, the replica will continue serving requests without a full outage.
-* Developers may **not be able to push new code during the transition window**, but read operations (clones, pulls, browsing, PR activity) remain available.
-* We still retain full replication from East (primary), ensuring DR readiness.
+**Benefits of enabling `--active`:**
+- **Local user requests:** West and On-prem nodes will serve user traffic directly, reducing latency for those regions.
+- **Higher availability:** These nodes will continue to function if the primary region (East) experiences downtime.
+- **Performance improvement:** Load is distributed, enhancing the overall efficiency of our infrastructure.
 
-This change increases overall availability and provides a smoother DR switchover experience for users, minimizing disruption.
+Let me know your thoughts on this change, or if you have any concerns before we move forward.
 
-Let me know if we should schedule a test cycle to validate this configuration.
+https://docs.github.com/en/enterprise-server@3.17/admin/monitoring-and-managing-your-instance/configuring-high-availability/creating-a-high-availability-replica
