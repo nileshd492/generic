@@ -1,16 +1,1 @@
-Proposal to Enable Active Mode for Replica Nodes on GitHub Enterprise Server
 
-Hi Team,
-
-I'd like to propose an update to our GitHub Enterprise Server configuration across the three regions: East (primary), West, and On-prem.
-
-Currently, our West and On-prem appliances serve as replicas. To improve availability and user experience, I recommend that we enable the **active mode** for these replica nodes using the `ghe-repl-node --active` flag.
-
-**Benefits of enabling `--active`:**
-- **Local user requests:** West and On-prem nodes will serve user traffic directly, reducing latency for those regions.
-- **Higher availability:** These nodes will continue to function if the primary region (East) experiences downtime.
-- **Performance improvement:** Load is distributed, enhancing the overall efficiency of our infrastructure.
-
-Let me know your thoughts on this change, or if you have any concerns before we move forward.
-
-https://docs.github.com/en/enterprise-server@3.17/admin/monitoring-and-managing-your-instance/configuring-high-availability/creating-a-high-availability-replica
